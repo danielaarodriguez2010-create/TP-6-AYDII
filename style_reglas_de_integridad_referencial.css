@@ -1,0 +1,39 @@
+body{
+    font-family:Arial, sans-serif;
+    margin: 30px;
+    background-color: #e6d7f3;
+}
+
+h1, h2 {
+    color: #333;
+    text-align: center;
+}
+
+p{
+    text-align: justify;
+    max-width: 900px;
+    margin: auto;
+}
+
+table{
+    width: 90%;
+    margin: 30px auto;
+    border-collapse: collapse;
+    background-color: rgb(218, 193, 247);
+}
+
+th, td{
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+}
+
+th{
+    background-color: #9553eb;
+    color: white;
+}
+
+select{
+    width: 100%;
+    padding: 5px;
+}

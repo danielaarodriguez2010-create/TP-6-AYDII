@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reglas de Integridad Referencial</title>
+    <link rel="stylesheet" href="style_reglas_de_integridad_referencial.css">
 </head>
 <body>
-    <h1>Trabajo Practico N°6: Reglas de Integridad Referencial</h1>
-    <h2>Ejercicio 1</h2>
+    <h1>Trabajo Practico N°6</h1>
+    <h2>Reglas de Integridad Referencial</h2>
     <p>
         Definir las reglas de integridad referencial para las relaciones del proyecto "Liga de Estrellas".
         Se deberá detallar y justificar técnicamente la lógica aplicada en las operaciones de:
@@ -15,30 +16,41 @@
         Para cada entidad relacionada, asegurando la consistencia de los datos según las reglas de negocio del torneo.
     </p>
     <h2>Tablas de Reglas de Integridad Referencial</h2>
-    <table border="1">
+    <table>
         <tr>
-            <th>Entidad</th>
-            <th>Operación</th>
-            <th>Regla de Integridad Referencial</th>
-            <th>Justificación Técnica</th>
+            <th colspan="2">Tablas</th>
+            <th colspan="3">Reglas de Integridad Referencial</th>
         </tr>
         <tr>
-            <td>Equipo</td>
-            <td>Inserción</td>
-            <td>No se permite insertar un equipo sin un entrenador asignado.</td>
-            <td>Esto asegura que cada equipo tenga un responsable claro, manteniendo la coherencia en la gestión del torneo.</td>
+            <th>Padre</th>
+            <th>Hijo</th>
+            <th>Inserción</th>
+            <th>Modificación</th>
+            <th>Borrado</th>
         </tr>
         <tr>
-            <td>Jugador</td>
-            <td>Modificación</td>
-            <td>No se permite modificar el equipo de un jugador si el nuevo equipo no existe.</td>
-            <td>Esto evita la asignación de jugadores a equipos inexistentes, garantizando la integridad de las relaciones entre jugadores y equipos.</td>
-        </tr>
-        <tr>
-            <td>Partido</td>
-            <td>Eliminación</td>
-            <td>No se permite eliminar un partido si existen registros de resultados asociados a ese partido.</td>
-            <td>Esto asegura que no se pierda información crítica sobre los resultados del torneo, manteniendo la integridad de los datos relacionados con los partidos.</td>
+            <td>Temporadas</td>
+            <td>Grupos</td>
+            <td>
+                <select>
+                    <option>Restringir</option>
+                    <option>Ignorar</option>
+                </select>
+            </td>
+            <td>
+                <select>
+                    <option>Restringir</option>
+                    <option>Ignorar</option>
+                    <option>Cascada</option>
+                </select>
+            </td>
+            <td>
+                <select>
+                    <option>Restringir</option>
+                    <option>Ignorar</option>
+                    <option>Cascada</option>
+                </select>
+            </td>
         </tr>
     </table>
 </body>
