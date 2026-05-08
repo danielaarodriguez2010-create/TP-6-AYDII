@@ -17,29 +17,17 @@
     <h2>Tablas de Reglas de Integridad Referencial</h2>
     <table border="1">
         <tr>
-            <th>Entidad</th>
-            <th>Operación</th>
-            <th>Regla de Integridad Referencial</th>
-            <th>Justificación Técnica</th>
-        </tr>
-        <tr>
-            <td>Equipo</td>
-            <td>Inserción</td>
-            <td>No se permite insertar un equipo sin un entrenador asignado.</td>
-            <td>Esto asegura que cada equipo tenga un responsable claro, manteniendo la coherencia en la gestión del torneo.</td>
-        </tr>
-        <tr>
-            <td>Jugador</td>
-            <td>Modificación</td>
-            <td>No se permite modificar el equipo de un jugador si el nuevo equipo no existe.</td>
-            <td>Esto evita la asignación de jugadores a equipos inexistentes, garantizando la integridad de las relaciones entre jugadores y equipos.</td>
-        </tr>
-        <tr>
-            <td>Partido</td>
-            <td>Eliminación</td>
-            <td>No se permite eliminar un partido si existen registros de resultados asociados a ese partido.</td>
-            <td>Esto asegura que no se pierda información crítica sobre los resultados del torneo, manteniendo la integridad de los datos relacionados con los partidos.</td>
-        </tr>
+            <th>Tablas</th>
+            <tr>
+                <td>Padre</td>
+                <td>Hijo</td>
+            </tr>
+            <th>Reglas</th>
+            <tr>
+                <td>Inserción</td>
+                <td>Modificación</td>
+                <td>Borrado</td>
+            </tr>
     </table>
 </body>
 </html>
