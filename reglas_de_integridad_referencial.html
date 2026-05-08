@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reglas de Integridad Referencial</title>
+    <link rel="stylesheet" href="style_reglas_de_integridad_referencial.css">
 </head>
 <body>
-    <h1>Trabajo Practico N°6: Reglas de Integridad Referencial</h1>
-    <h2>Ejercicio 1</h2>
+    <h1>Trabajo Practico N°6</h1>
+    <h2>Reglas de Integridad Referencial</h2>
     <p>
         Definir las reglas de integridad referencial para las relaciones del proyecto "Liga de Estrellas".
         Se deberá detallar y justificar técnicamente la lógica aplicada en las operaciones de:
@@ -15,19 +16,42 @@
         Para cada entidad relacionada, asegurando la consistencia de los datos según las reglas de negocio del torneo.
     </p>
     <h2>Tablas de Reglas de Integridad Referencial</h2>
-    <table border="1">
+    <table>
         <tr>
-            <th>Tablas</th>
-            <tr>
-                <td>Padre</td>
-                <td>Hijo</td>
-            </tr>
-            <th>Reglas</th>
-            <tr>
-                <td>Inserción</td>
-                <td>Modificación</td>
-                <td>Borrado</td>
-            </tr>
+            <th colspan="2">Tablas</th>
+            <th colspan="3">Reglas de Integridad Referencial</th>
+        </tr>
+        <tr>
+            <th>Padre</th>
+            <th>Hijo</th>
+            <th>Inserción</th>
+            <th>Modificación</th>
+            <th>Borrado</th>
+        </tr>
+        <tr>
+            <td>Temporadas</td>
+            <td>Grupos</td>
+            <td>
+                <select>
+                    <option>Restringir</option>
+                    <option>Ignorar</option>
+                </select>
+            </td>
+            <td>
+                <select>
+                    <option>Restringir</option>
+                    <option>Ignorar</option>
+                    <option>Cascada</option>
+                </select>
+            </td>
+            <td>
+                <select>
+                    <option>Restringir</option>
+                    <option>Ignorar</option>
+                    <option>Cascada</option>
+                </select>
+            </td>
+        </tr>
     </table>
 </body>
 </html>
