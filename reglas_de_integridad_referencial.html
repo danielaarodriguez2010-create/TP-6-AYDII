@@ -280,6 +280,191 @@
             </td>
         </tr>
     </table>
+    <h2>Justificación de Inserción (Regla: Restringir)</h2>
+
+<ul>
+    <li><strong>Temporadas - Grupos:</strong> No puedes crear un grupo si no existe una temporada activa donde ese grupo deba competir.</li>
+
+    <li><strong>Temporadas - Fechas:</strong> Para insertar una "Fecha 1", el sistema debe verificar que exista la temporada, de lo contrario, la fecha no tendría un calendario de referencia.</li>
+
+    <li><strong>Temporadas - Traspasos:</strong> Un pase de un jugador ocurre en un mercado de pases específico de una temporada. Si no hay temporada cargada, el traspaso no tiene contexto temporal.</li>
+
+    <li><strong>Temporadas - Tabla de Posiciones:</strong> No se puede generar una tabla de puntos si no existe la temporada que la agrupa.</li>
+
+    <li><strong>Temporadas - Temporadas_X_Torneos:</strong> Al ser una tabla de vinculación, necesita que la temporada exista primero para poder asociarla con los otros elementos (torneos, equipos, etc.).</li>
+
+    <li><strong>Torneos - Temporadas:</strong> No puedes iniciar una "Temporada 2026" si no has definido a qué Torneo pertenece.</li>
+
+    <li><strong>Torneos - Traspasos:</strong> Se debe restringir la inserción para asegurar que el traspaso se registre dentro de un torneo válido y oficial.</li>
+
+    <li><strong>Torneos - Temporadas_X_Torneos:</strong> Para armar la estructura compleja de participación, el Torneo debe estar previamente creado en el sistema.</li>
+
+    <li><strong>Grupos - Tabla de Posiciones:</strong> La tabla de posiciones se desprende de un grupo. Si intentas insertar una tabla sin grupo, el sistema no sabría qué equipos comparar.</li>
+
+    <li><strong>Grupos - Temporadas_X_Torneos:</strong> El grupo es un componente de la estructura de juego; debe existir para poder asignar equipos a él.</li>
+
+    <li><strong>Grupos - Entrenadores:</strong> No puedes asignar un entrenador a un grupo si el grupo no ha sido creado todavía.</li>
+
+    <li><strong>Grupos - Partidos:</strong> Un partido debe pertenecer a un grupo (ej. Grupo A). Si el grupo no existe, el partido no tiene validez en la competencia.</li>
+
+    <li><strong>Jugadores - Traspasos:</strong> Es imposible registrar un traspaso si el Jugador (el protagonista del pase) no existe en la base de datos.</li>
+
+    <li><strong>Jugadores - Premios Jugadores:</strong> No se puede asignar un premio (como "Goleador") a un jugador que no ha sido dado de alta previamente.</li>
+
+    <li><strong>Jugadores - Temporadas_X_Torneos:</strong> Para inscribir a alguien en la lista de buena fe del torneo, el Jugador debe estar registrado.</li>
+
+    <li><strong>Jugadores - Planillas:</strong> Un jugador no puede aparecer en una planilla de partido si no existe en el sistema; esto evita el fraude de identidad.</li>
+
+    <li><strong>Equipos - Traspasos:</strong> El traspaso requiere un equipo de origen o destino. Si el equipo no existe, el registro es inválido.</li>
+
+    <li><strong>Equipos - Tabla de Posiciones:</strong> No puedes insertar un equipo en la tabla de puntos si el equipo no está en el maestro de clubes.</li>
+
+    <li><strong>Equipos - Premios Equipos:</strong> Un premio (ej. "Valla menos vencida") solo puede asignarse a un equipo que figure en el sistema.</li>
+
+    <li><strong>Equipos - Temporadas_X_Torneos:</strong> Al igual que los jugadores, los equipos deben estar registrados para participar en la estructura del torneo.</li>
+
+    <li><strong>Equipos - Planilla:</strong> El equipo debe existir para ser seleccionado en el acta del partido.</li>
+
+    <li><strong>Equipos - Partidos:</strong> No puedes programar un partido entre "Equipo A" y "Equipo B" si alguno de los dos no existe en la base de datos.</li>
+
+    <li><strong>Premios Grupales - Premios Equipos:</strong> Para entregar un premio de tipo "Fair Play", primero debe existir la definición del premio en la tabla de "Premios Grupales".</li>
+
+    <li><strong>Premios Individuales - Premios Jugadores:</strong> No puedes cargar que alguien ganó el "Botín de Oro" si el premio no está definido como una categoría existente.</li>
+
+    <li><strong>Tipo de Torneos - Torneos:</strong> Un torneo debe ser de un tipo (ej. "Apertura" o "Clausura"). Si el tipo no existe, no puedes crear el torneo.</li>
+
+    <li><strong>Categoría - Torneos:</strong> No se puede crear un torneo sin antes definir su categoría (ej. "Primera", "Veteranos").</li>
+
+    <li><strong>Partidos - Planillas:</strong> La planilla es el registro de un partido. Si el partido no está programado, no se puede insertar su planilla.</li>
+
+    <li><strong>Partidos - Resultados:</strong> No se puede cargar un "2 a 0" si el partido no existe previamente en el calendario.</li>
+
+    <li><strong>Fechas - Partidos:</strong> Un partido se juega en una fecha determinada. El sistema restringe la inserción para asegurar que el partido se asocie a una jornada válida.</li>
+</ul>
+
+<h2>Justificación de Modificación (Regla: Cascada)</h2>
+
+<ul>
+    <li><strong>Temporadas - Grupos:</strong> Si se corrige el ID o código de una temporada, el grupo debe actualizar su referencia automáticamente para seguir perteneciendo a la misma.</li>
+
+    <li><strong>Temporadas - Fechas:</strong> Las fechas están atadas cronológicamente a la temporada; si la temporada cambia su identificador, las fechas deben actualizarse para no quedar huérfanas.</li>
+
+    <li><strong>Temporadas - Traspasos:</strong> El historial de pases debe reflejar siempre la temporada correcta. Si el código de la temporada se modifica, el registro del traspaso debe actualizarse para mantener la coherencia histórica.</li>
+
+    <li><strong>Temporadas - Tabla de Posiciones:</strong> Si cambias el ID de la temporada, la tabla de posiciones debe actualizarse al instante para que los puntos sigan asignados al periodo correcto.</li>
+
+    <li><strong>Temporadas - Temporadas_X_Torneos:</strong> Al ser una tabla relacional clave, cualquier cambio en la Temporada debe replicarse aquí para no romper la estructura de todo el torneo.</li>
+
+    <li><strong>Torneos - Temporadas:</strong> Si el Torneo cambia de código, todas sus temporadas asociadas deben heredar ese cambio para no perder la jerarquía.</li>
+
+    <li><strong>Torneos - Traspasos:</strong> La Cascada asegura que el traspaso siempre apunte al torneo correcto, incluso si los datos del torneo principal se editan.</li>
+
+    <li><strong>Torneos - Temporadas_X_Torneos:</strong> Es vital que la tabla de asociación se actualice automáticamente ante cualquier cambio en el Torneo para mantener unidos a los equipos y jugadores.</li>
+
+    <li><strong>Grupos - Tabla de Posiciones:</strong> Si el nombre o ID de un Grupo cambia, la tabla de posiciones debe reflejarlo para mostrar los resultados correctamente.</li>
+
+    <li><strong>Grupos - Temporadas_X_Torneos:</strong> La asociación de equipos debe mantenerse firme; si el grupo se modifica, la tabla intermedia debe actualizar la referencia.</li>
+
+    <li><strong>Grupos - Entrenadores:</strong> El entrenador debe seguir vinculado a su grupo aunque el identificador de dicho grupo sea modificado administrativamente.</li>
+
+    <li><strong>Grupos - Partidos:</strong> Si el ID del grupo cambia, los partidos deben actualizar su referencia para que el sistema sepa a qué zona pertenecen esos puntos.</li>
+
+    <li><strong>Jugadores - Traspasos:</strong> Si se corrige el DNI o el ID de un jugador, el registro de su pase debe actualizarse automáticamente para que el historial no se pierda.</li>
+
+    <li><strong>Jugadores - Premios Jugadores:</strong> El premio debe seguir perteneciendo al mismo jugador aunque sus datos de identificación en el maestro sean modificados.</li>
+
+    <li><strong>Jugadores - Temporadas_X_Torneos:</strong> La lista de buena fe debe actualizarse en cascada si hay cambios en los datos del jugador para que no haya errores de inscripción.</li>
+
+    <li><strong>Jugadores - Planillas:</strong> Si el ID del jugador cambia, su presencia en las actas de partidos antiguos debe actualizarse para que las estadísticas sigan sumando a su perfil.</li>
+
+    <li><strong>Equipos - Traspasos:</strong> Si un equipo cambia de código, los traspasos realizados deben reflejar el nuevo dato para mantener la legalidad del historial.</li>
+
+    <li><strong>Equipos - Tabla de Posiciones:</strong> Es fundamental que si el equipo cambia de ID, la tabla de posiciones arrastre sus puntos al nuevo identificador.</li>
+
+    <li><strong>Equipos - Premios Equipos:</strong> Los trofeos ganados deben seguir vinculados al club aunque este cambie su código en la base de datos.</li>
+
+    <li><strong>Equipos - Temporadas_X_Torneos:</strong> La participación del club en el torneo depende de que esta tabla intermedia esté siempre sincronizada con el maestro de equipos.</li>
+
+    <li><strong>Equipos - Planilla:</strong> Al modificar un equipo, las planillas de los partidos ya jugados deben actualizarse para que no aparezcan errores de "equipo no encontrado".</li>
+
+    <li><strong>Equipos - Partidos:</strong> Si el ID del equipo cambia, el fixture debe actualizarse automáticamente para que los próximos partidos muestren los datos correctos.</li>
+
+    <li><strong>Premios Grupales - Premios Equipos:</strong> Si se cambia el nombre de la categoría del premio, todos los equipos que lo ganaron deben ver el nombre actualizado.</li>
+
+    <li><strong>Premios Individuales - Premios Jugadores:</strong> Si se edita la definición del premio individual, el cambio debe viajar a todos los jugadores que poseen dicho premio.</li>
+
+    <li><strong>Tipo de Torneos - Torneos:</strong> Si el tipo de torneo se modifica, el torneo debe actualizar su referencia para mantener la regla de negocio.</li>
+
+    <li><strong>Categoría - Torneos:</strong> Si se cambia el nombre o código de la categoría, el torneo debe reflejar este cambio en cascada.</li>
+
+    <li><strong>Partidos - Planillas:</strong> Si el ID del partido se modifica, la planilla asociada debe actualizarse para no perder el acta del encuentro.</li>
+
+    <li><strong>Partidos - Resultados:</strong> El resultado está pegado al partido; si el código del partido cambia, el marcador debe seguirlo mediante Cascada.</li>
+
+    <li><strong>Fechas - Partidos:</strong> Si se cambia el ID de una fecha, todos los partidos programados en ella deben actualizar su referencia para aparecer en la jornada correcta.</li>
+</ul>
+
+<h2>Justificación de Reglas de Borrado</h2>
+
+<ul>
+    <li><strong>Temporadas - Grupos (Restringir):</strong> No puedes eliminar una temporada si ya tiene grupos configurados.</li>
+
+    <li><strong>Temporadas - Fechas (Restringir):</strong> Las fechas dependen de la temporada. Se restringe para evitar perder el calendario programado accidentalmente.</li>
+
+    <li><strong>Temporadas - Traspasos (Ignorar):</strong> El registro del traspaso puede quedar como historial sin afectar la integridad.</li>
+
+    <li><strong>Temporadas - Tabla de Posiciones (Restringir):</strong> Borrar la temporada invalidaría las posiciones alcanzadas.</li>
+
+    <li><strong>Temporadas - Temporadas_X_Torneos (Restringir):</strong> Borrar la temporada rompería toda la estructura jerárquica del torneo.</li>
+
+    <li><strong>Torneos - Temporadas (Restringir):</strong> Si tiene temporadas activas o pasadas, el sistema impide su borrado.</li>
+
+    <li><strong>Torneos - Traspasos (Ignorar):</strong> El traspaso es un dato de auditoría que puede mantenerse.</li>
+
+    <li><strong>Torneos - Temporadas_X_Torneos (Restringir):</strong> Se bloquea el borrado porque esta tabla une la lógica de todo el sistema.</li>
+
+    <li><strong>Grupos - Tabla de Posiciones (Restringir):</strong> La tabla depende directamente del grupo.</li>
+
+    <li><strong>Grupos - Temporadas_X_Torneos (Restringir):</strong> Se restringe para no perder la organización de las zonas.</li>
+
+    <li><strong>Grupos - Entrenadores (Restringir):</strong> No puedes borrar un grupo si tiene entrenadores asignados.</li>
+
+    <li><strong>Grupos - Partidos (Restringir):</strong> No puedes borrar un grupo que ya tiene partidos programados o jugados.</li>
+
+    <li><strong>Jugadores - Traspasos (Restringir):</strong> El historial de traspasos perdería sentido.</li>
+
+    <li><strong>Jugadores - Premios Jugadores (Restringir):</strong> Se protege el mérito deportivo.</li>
+
+    <li><strong>Jugadores - Temporadas_X_Torneos (Restringir):</strong> Si está inscripto en un torneo, el sistema impide su borrado.</li>
+
+    <li><strong>Jugadores - Planillas (Restringir):</strong> Las planillas son actas oficiales.</li>
+
+    <li><strong>Equipos - Traspasos (Restringir):</strong> No puede eliminarse para no romper el historial.</li>
+
+    <li><strong>Equipos - Tabla de Posiciones (Restringir):</strong> No puedes borrar un equipo que figura en la tabla.</li>
+
+    <li><strong>Equipos - Premios Equipos (Restringir):</strong> Se protege el palmarés del club.</li>
+
+    <li><strong>Equipos - Temporadas_X_Torneos (Restringir):</strong> Si el equipo está asignado a una competencia, su borrado está bloqueado.</li>
+
+    <li><strong>Equipos - Planilla (Restringir):</strong> Un equipo no puede desaparecer si ya fue asentado en una planilla.</li>
+
+    <li><strong>Equipos - Partidos (Restringir):</strong> Evita inconsistencias en los partidos.</li>
+
+    <li><strong>Premios Grupales - Premios Equipos (Restringir):</strong> No se puede borrar la categoría del premio si ya fue asignada.</li>
+
+    <li><strong>Premios Individuales - Premios Jugadores (Restringir):</strong> No se borra la definición del premio si ya fue otorgado.</li>
+
+    <li><strong>Tipo de Torneos - Torneos (Restringir):</strong> No puedes borrar un tipo de torneo mientras existan torneos usándolo.</li>
+
+    <li><strong>Categoría - Torneos (Restringir):</strong> No puedes borrar la categoría si hay torneos asociados.</li>
+
+    <li><strong>Partidos - Planillas (Restringir):</strong> Si el partido ya tiene planilla cargada, no puede borrarse.</li>
+
+    <li><strong>Partidos - Resultados (Restringir):</strong> Protege la verdad deportiva.</li>
+
+    <li><strong>Fechas - Partidos (Restringir):</strong> No puedes borrar una fecha si ya tiene partidos programados.</li>
+</ul>
 </body>
 </html>
 
